@@ -19,8 +19,8 @@ Need to validate the following:
   
 
 
-The Workshop is divided into the following sections:
-Section 1:
+### Agenda
+#### Section 1:
 ==========
 1. Introduce and create a simple application that includes some of the 
 features that support the localization process on our platform.
@@ -28,7 +28,7 @@ features that support the localization process on our platform.
 each one of these features
 1. Describe how to suitably externalize each one of these user interface features
 
-Section 2:
+#### Section 2:
 ==========
 1. Export content for delivery to a translation team
 1. Verify the returned deliverables from the translation team
@@ -37,7 +37,7 @@ Section 2:
 1. Review your translated application and identify any outstanding issues
 1. Troubleshoot our application to identify globalization issues
 
-Section 3:
+#### Section 3:
 ==========
 1. Correct problems with our sys_choice elements
 1. Identify issues and rectify problems with our sys_documentation and
@@ -46,21 +46,21 @@ sys_translated(txt) table items
 1. Use the appropriate method to externalize these hard-coded strings so 
 that they are available for translation
 
-Section 4:
+#### Section 4:
 ==========
 1. Use locale-aware time and date formats in our code that structure these
 formats according to the user's preferred display settings
 
 1. Differentiate between price and currency and learn when to use which feature
 
-Section 5: (optional)
+#### Section 5: (optional)
 =====================
 1. Translation of Knowledge articles `(can only talk about Madrid functionality)`
 
 1. Demonstrate the usage of the TranslationLoader script
 
 
-Getting Started - Log on to Your Training Instance 
+#### Getting Started - Log on to Your Training Instance 
 ====================================================
 
 1. Navigate to the unique instance URL provided to you. 
@@ -70,7 +70,7 @@ Getting Started - Log on to Your Training Instance
 1. Retrieve our source application
 
 
-Change your locale
+#### Change your locale
 ===================
 
 1. Check that you have the necessary i18n plugins installed
@@ -83,7 +83,7 @@ Change your locale
 originating from our app
 
 
-Create new user interface elements
+#### Create new user interface elements
 ==================================
 1. Create a new language record `(may be out of scope)`
 
@@ -98,14 +98,14 @@ Create new user interface elements
 1. Create a new client script message
 
 
-Export your content for translation
+#### Export your content for translation
 =============================================
 1. Export the contents of the translation tables
 
 1. Understand the requirements of the export types (Plurals, Hints, etc.)
 
 
-Import your translated content
+#### Import your translated content
 =============================================
 1. Retrieve the set of translations we have created for you
 
@@ -125,7 +125,7 @@ https://docs.servicenow.com/bundle/london-platform-administration/page/administe
 (User script elements that do not have an associated record in sys_ui_message)
 ```
 
-Fix globalization issues
+#### Fix globalization issues
 =========================
 
 1. Switch to using a translated field type
@@ -149,7 +149,7 @@ Reference currency
 Session currency
 ```
 
-Bonus topics:
+#### Bonus topics:
 =============
 1. Export a knowledge article
 
