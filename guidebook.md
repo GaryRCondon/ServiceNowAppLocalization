@@ -8,8 +8,15 @@ and localization of an app distributed on the ServiceNow platform and also to
 discuss some of the best practises, gotchas, challenges and nuances of 
 delivering and deploying global apps.  
 
+```
 Demonstration instance:
 =======================
+Need to validate the following:
+1. Availability of instance with i18n plugins pre-installed
+1. Language plugin installed (got to pick a language)
+1. Attendees will have access to sample app with some sample code pre-included
+```
+  
 
 
 The Workshop is divided into the following sections:
@@ -48,7 +55,7 @@ formats according to the user's preferred display settings
 
 Section 5: (optional)
 =====================
-1. Translation of Knowledge articles (can only talk about Madrid functionality)
+1. Translation of Knowledge articles `(can only talk about Madrid functionality)`
 
 1. Demonstrate the usage of the TranslationLoader script
 
@@ -78,7 +85,7 @@ originating from our app
 
 Create new user interface elements
 ==================================
-1. Create a new language record (may be out of scope)
+1. Create a new language record `(may be out of scope)`
 
 1. Create a new choice record
 
@@ -112,10 +119,11 @@ https://docs.servicenow.com/bundle/london-platform-administration/page/administe
 1. Switch user locale and view your now-translated app
 
 1. Identify problems with the now-translated application
+```
 (UI elements that do not use a translated field type)
 (Hard-coded strings introduced in user script)
 (User script elements that do not have an associated record in sys_ui_message)
-
+```
 
 Fix globalization issues
 =========================
@@ -127,16 +135,19 @@ Fix globalization issues
 1. Create table entry for item in sys_ui_message
 
 1. Change user script to display current time in user locale
+```
 (need a preexisting field that outputs the current time using setValue() )
 Update the field to display the current time using setdisplayValue()
+```
 
 1. Demonstrate difference between price and currency
+```
 (use pre-existing code and highlight the difference between:
 price: as the cost of an item
 Currency: transactional spend
 Reference currency
 Session currency
-
+```
 
 Bonus topics:
 =============
@@ -145,4 +156,4 @@ Bonus topics:
 1. Import a knowledge article
 
 1. Talk about the TranslationLoader script 
-(won't have time to actively use)
+`(won't have time to actively use)`
