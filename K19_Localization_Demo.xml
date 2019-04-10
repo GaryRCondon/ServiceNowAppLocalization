@@ -1,0 +1,1749 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2019-04-10 01:23:27">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description>updateset captures trnasform script changes</description>
+<inserted/>
+<name>K19_Localization_Demo</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>769699c88978b700964f2701e123a0c2</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>maint</sys_created_by>
+<sys_created_on>2019-04-10 01:23:26</sys_created_on>
+<sys_id>f40e7d908970f700964f2701e123a079</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>maint</sys_updated_by>
+<sys_updated_on>2019-04-10 01:23:26</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_transform_script_6542599dc0a801653b8ff7a8d879d6be</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_transform_script"&gt;&lt;sys_transform_script action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;map display_value="GMLD Translated"&gt;65411c67c0a801652b26e513bfbbaa01&lt;/map&gt;&lt;order&gt;100&lt;/order&gt;&lt;script&gt;&lt;![CDATA[/**
+ * For variables go to: http://docs.servicenow.com/?context=Import_Sets
+ *
+ * For each language insert a sys_choice entry (english is mapped directly)
+ **/
+// Build label/hint field names 
+var langArray = processingLanguage.split(';');
+var langToProcess = '';
+for(i=0;langArray &amp;&amp; i&lt;langArray.length;i++) {
+langToProcess = langArray[i];
+
+var lfn = 'u_label__' + langToProcess + '_';
+var pfn = 'u_plural__' + langToProcess + '_';
+var hlfn = 'u_help__' + langToProcess + '_';
+var hfn = 'u_hint__' + langToProcess + '_';
+
+var fieldValid = gs.fieldExists(map.source_table, lfn);
+
+if (fieldValid) {
+   // New sys_choice for each language
+   var lang = new GlideRecord(map.target_table);
+   lang.initialize();
+   
+   // Map entries
+   var tme = new GlideRecord('sys_transform_entry');
+   tme.addQuery('map', map.sys_id);
+   tme.query();
+   while (tme.next()) {
+      if (tme.target_field != 'language')
+         lang.setValue(tme.target_field, source.getValue(tme.source_field));
+   }
+   lang.language = langToProcess;
+   lang.setValue('label', source.getValue(lfn));
+   lang.setValue('plural', source.getValue(pfn));
+   lang.setValue('help', source.getValue(hlfn));
+   lang.setValue('hint', source.getValue(hfn));
+   lang.setWorkflow(false);
+   lang.insert();
+}
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_transform_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;myla.jordan&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2010-11-19 17:50:51&lt;/sys_created_on&gt;&lt;sys_id&gt;6542599dc0a801653b8ff7a8d879d6be&lt;/sys_id&gt;&lt;sys_mod_count&gt;14&lt;/sys_mod_count&gt;&lt;sys_name&gt;onAfter&lt;/sys_name&gt;&lt;sys_package display_value="I18N: Internationalization Translation helper" source="com.glide.i18n.translation_helper"&gt;084d0b5489203300964f2701e123a016&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_transform_script_6542599dc0a801653b8ff7a8d879d6be&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;maint&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2019-04-10 01:08:21&lt;/sys_updated_on&gt;&lt;when&gt;onAfter&lt;/when&gt;&lt;/sys_transform_script&gt;&lt;/record_update&gt;</payload>
+<payload_hash>869424197</payload_hash>
+<remote_update_set display_value="K19_Localization_Demo">f40e7d908970f700964f2701e123a079</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>maint</sys_created_by>
+<sys_created_on>2019-04-10 01:23:26</sys_created_on>
+<sys_id>380e7d908970f700964f2701e123a07b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16a04c9e4400000001</sys_recorded_at>
+<sys_updated_by>maint</sys_updated_by>
+<sys_updated_on>2019-04-10 01:23:26</sys_updated_on>
+<table/>
+<target_name>onAfter</target_name>
+<type>Transform Script</type>
+<update_domain>global</update_domain>
+<update_guid>378a71507c70f700b2faa58fbf49f393</update_guid>
+<update_guid_history>378a71507c70f700b2faa58fbf49f393:869424197,28f65dc8b278b7008ddc2c2176c3b589:-1356856606,9d56d5c8a678b7000db1bb2727b3aab6:1446766816,1156d5c8de78b70086494168b4774ab6:-1820783416</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_data_source_728bf9508970f700964f2701e123a08e</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_data_source"><sys_data_source action="INSERT_OR_UPDATE"><category/><connection_timeout>0</connection_timeout><connection_url>attachment://sys_data_source:728bf9508970f700964f2701e123a08e/</connection_url><connection_url_parameters/><csv_delimiter/><database_name/><database_port/><expand_node_children>false</expand_node_children><file_path/><file_retrieval_method>Attachment</file_retrieval_method><format>Excel</format><glide_keystore>false</glide_keystore><header_row>1</header_row><import_set_table_label/><import_set_table_name>u_trf_translated</import_set_table_name><instance_name/><jdbc_password/><jdbc_server/><jdbc_user_name/><jpath_root_node/><last_run_database_field/><last_run_datetime/><ldap_target/><maximum_rows/><mid_server/><name>TRF Translated</name><oracle_port>1521</oracle_port><oracle_sid>orcl</oracle_sid><properties>language=fr;it</properties><query>All Rows from Table</query><query_timeout>0</query_timeout><scp_authentication>Username and Password</scp_authentication><scp_password/><scp_port/><scp_server/><scp_user_name/><sheet_number>1</sheet_number><sql_statement/><ssh_keyfile_path/><sys_class_name>sys_data_source</sys_class_name><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:13:11</sys_created_on><sys_id>728bf9508970f700964f2701e123a08e</sys_id><sys_mod_count>1</sys_mod_count><sys_name>TRF Translated</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_data_source_728bf9508970f700964f2701e123a08e</sys_update_name><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:14:53</sys_updated_on><table_name/><type>File</type><use_integrated_authentication>false</use_integrated_authentication><use_last_run_datetime>false</use_last_run_datetime><xpath_root_node/><zipped>false</zipped></sys_data_source></record_update>]]></payload>
+<payload_hash>-1669927883</payload_hash>
+<remote_update_set display_value="K19_Localization_Demo">f40e7d908970f700964f2701e123a079</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>maint</sys_created_by>
+<sys_created_on>2019-04-10 01:23:26</sys_created_on>
+<sys_id>3c0e7d908970f700964f2701e123a079</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16a04cfdf210000001</sys_recorded_at>
+<sys_updated_by>maint</sys_updated_by>
+<sys_updated_on>2019-04-10 01:23:26</sys_updated_on>
+<table/>
+<target_name>TRF Translated</target_name>
+<type>Data Source</type>
+<update_domain>global</update_domain>
+<update_guid>d30cbd50f370f700f2b59f02efc6803b</update_guid>
+<update_guid_history>d30cbd50f370f700f2b59f02efc6803b:-1669927883,22ab3950fc70f70094b1fbe088fd304e:-687658689</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_data_source_ffabf9508970f700964f2701e123a0d1</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_data_source"><sys_data_source action="INSERT_OR_UPDATE"><category/><connection_timeout>0</connection_timeout><connection_url>attachment://sys_data_source:ffabf9508970f700964f2701e123a0d1/</connection_url><connection_url_parameters/><csv_delimiter/><database_name/><database_port/><expand_node_children>false</expand_node_children><file_path/><file_retrieval_method>Attachment</file_retrieval_method><format>Excel</format><glide_keystore>false</glide_keystore><header_row>1</header_row><import_set_table_label/><import_set_table_name>u_gmld_translated</import_set_table_name><instance_name/><jdbc_password/><jdbc_server/><jdbc_user_name/><jpath_root_node/><last_run_database_field/><last_run_datetime/><ldap_target/><maximum_rows/><mid_server/><name>GMLD Translated</name><oracle_port>1521</oracle_port><oracle_sid>orcl</oracle_sid><properties>language=fr;it</properties><query>All Rows from Table</query><query_timeout>0</query_timeout><scp_authentication>Username and Password</scp_authentication><scp_password/><scp_port/><scp_server/><scp_user_name/><sheet_number>1</sheet_number><sql_statement/><ssh_keyfile_path/><sys_class_name>sys_data_source</sys_class_name><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:14:12</sys_created_on><sys_id>ffabf9508970f700964f2701e123a0d1</sys_id><sys_mod_count>1</sys_mod_count><sys_name>GMLD Translated</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_data_source_ffabf9508970f700964f2701e123a0d1</sys_update_name><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:14:55</sys_updated_on><table_name/><type>File</type><use_integrated_authentication>false</use_integrated_authentication><use_last_run_datetime>false</use_last_run_datetime><xpath_root_node/><zipped>false</zipped></sys_data_source></record_update>]]></payload>
+<payload_hash>762370731</payload_hash>
+<remote_update_set display_value="K19_Localization_Demo">f40e7d908970f700964f2701e123a079</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>maint</sys_created_by>
+<sys_created_on>2019-04-10 01:23:26</sys_created_on>
+<sys_id>3c0e7d908970f700964f2701e123a07a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16a04cfe8770000001</sys_recorded_at>
+<sys_updated_by>maint</sys_updated_by>
+<sys_updated_on>2019-04-10 01:23:26</sys_updated_on>
+<table/>
+<target_name>GMLD Translated</target_name>
+<type>Data Source</type>
+<update_domain>global</update_domain>
+<update_guid>041c3d50b570f7006244aeb2e4507ec3</update_guid>
+<update_guid_history>041c3d50b570f7006244aeb2e4507ec3:762370731,a9ebbd508970f700f2f9d6ad5a3f1d31:-1356340127</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_list_sys_translatedtxt_translations_null</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_ui_list parent="" relationship="" sys_domain="global" table="sys_translatedtxt_translations" version="2" view=""><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>documentkey</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>0</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>077d79908970f700964f2701e123a020</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>documentkey_sys_id</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>1</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>877d79908970f700964f2701e123a020</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>tablename</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>2</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>0b7d79908970f700964f2701e123a020</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>fieldname</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>3</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>8b7d79908970f700964f2701e123a020</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>english_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>4</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>0f7d79908970f700964f2701e123a020</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>brazilian_portuguese_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>5</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>8f7d79908970f700964f2701e123a020</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>chinese_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>6</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>037d79908970f700964f2701e123a021</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>traditional_chinese_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>7</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>837d79908970f700964f2701e123a021</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>czech_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>8</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>077d79908970f700964f2701e123a021</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>dutch_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>9</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>877d79908970f700964f2701e123a021</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>finnish_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>10</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>0b7d79908970f700964f2701e123a021</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>french_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>11</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>8b7d79908970f700964f2701e123a021</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>french_canada_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>12</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>0f7d79908970f700964f2701e123a021</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>german_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>13</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>8f7d79908970f700964f2701e123a021</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>hebrew_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>14</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>037d79908970f700964f2701e123a022</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>hungarian_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>15</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>837d79908970f700964f2701e123a022</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>italian_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>16</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>077d79908970f700964f2701e123a022</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>japanese_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>17</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>877d79908970f700964f2701e123a022</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>korean_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>18</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>0b7d79908970f700964f2701e123a022</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>polish_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>19</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>8b7d79908970f700964f2701e123a022</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>portuguese_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>20</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>0f7d79908970f700964f2701e123a022</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>russian_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>21</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>8f7d79908970f700964f2701e123a022</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>spanish_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>22</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>037d79908970f700964f2701e123a023</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>thai_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>23</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>837d79908970f700964f2701e123a023</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>turkish_value</element><list_id display_value="sys_translatedtxt_translations" element="NULL" name="sys_translatedtxt_translations" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">cb7d79908970f700964f2701e123a01f</list_id><max_value>false</max_value><min_value>false</min_value><position>24</position><sum>false</sum><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_id>077d79908970f700964f2701e123a023</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on></sys_ui_list_element><sys_ui_list action="INSERT_OR_UPDATE"><average_value>false</average_value><element/><max_value>false</max_value><min_value>false</min_value><name>sys_translatedtxt_translations</name><parent/><position/><relationship/><sum>false</sum><sys_class_name>sys_ui_list</sys_class_name><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:21:08</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>cb7d79908970f700964f2701e123a01f</sys_id><sys_mod_count>0</sys_mod_count><sys_name>sys_translatedtxt_translations</sys_name><sys_package display_value="I18N: Internationalization Translation helper" source="com.glide.i18n.translation_helper">084d0b5489203300964f2701e123a016</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_ui_list_sys_translatedtxt_translations_null</sys_update_name><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:21:08</sys_updated_on><sys_user/><view display_value="Default view" name="NULL">Default view</view><view_name/></sys_ui_list></sys_ui_list></record_update>]]></payload>
+<payload_hash>2074074658</payload_hash>
+<remote_update_set display_value="K19_Localization_Demo">f40e7d908970f700964f2701e123a079</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>maint</sys_created_by>
+<sys_created_on>2019-04-10 01:23:26</sys_created_on>
+<sys_id>700e7d908970f700964f2701e123a07c</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16a04d598eb0000001</sys_recorded_at>
+<sys_updated_by>maint</sys_updated_by>
+<sys_updated_on>2019-04-10 01:23:26</sys_updated_on>
+<table>sys_translatedtxt_translations</table>
+<target_name>Translated Text Translations</target_name>
+<type>List Layout</type>
+<update_domain>global</update_domain>
+<update_guid>837d7990f670f7009ed31a7f34a20226</update_guid>
+<update_guid_history>837d7990f670f7009ed31a7f34a20226:2074074658,327d3990c670f700811176dc73ab0c38:502183747</update_guid_history>
+<update_set display_value=""/>
+<view>Default view</view>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_transform_script_65409970c0a8016520369caa00d22cab</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_transform_script"&gt;&lt;sys_transform_script action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;map display_value="Choice Translated"&gt;653e1cecc0a8016522c8c5e52fa6d4f3&lt;/map&gt;&lt;order&gt;100&lt;/order&gt;&lt;script&gt;&lt;![CDATA[/**
+ * For variables go to: http://docs.servicenow.com/?context=Import_Sets
+ *
+ * For each language insert a sys_choice entry (english is mapped directly)
+ **/
+// Build label/hint field names
+//var langArray = ['fr','it'];
+var langArray = processingLanguage.split(';');
+var langToProcess = '';
+for(i=0;langArray &amp;&amp; i&lt;langArray.length;i++) {
+langToProcess = langArray[i];
+var lfn = 'u_label__' + langToProcess + '_';
+var hfn = 'u_hint__' + langToProcess + '_';
+var fieldValid = gs.fieldExists(map.source_table, lfn);
+
+if (fieldValid) {
+   // New sys_choice for each language
+   var lang = new GlideRecord(map.target_table);
+   lang.initialize();
+   
+   // Map entries
+   var tme = new GlideRecord('sys_transform_entry');
+   tme.addQuery('map', map.sys_id);
+   tme.query();
+   while (tme.next()) {
+      if (tme.target_field != 'language')
+         lang.setValue(tme.target_field, source.getValue(tme.source_field));
+   }
+   lang.language = langToProcess;
+   lang.setValue('label', source.getValue(lfn));
+   lang.setValue('hint', source.getValue(hfn));
+   lang.setWorkflow(false);
+   lang.insert();
+}
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_transform_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;myla.jordan&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2010-11-19 17:49:06&lt;/sys_created_on&gt;&lt;sys_id&gt;65409970c0a8016520369caa00d22cab&lt;/sys_id&gt;&lt;sys_mod_count&gt;27&lt;/sys_mod_count&gt;&lt;sys_name&gt;onAfter&lt;/sys_name&gt;&lt;sys_package display_value="I18N: Internationalization Translation helper" source="com.glide.i18n.translation_helper"&gt;084d0b5489203300964f2701e123a016&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_transform_script_65409970c0a8016520369caa00d22cab&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;maint&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2019-04-10 01:15:47&lt;/sys_updated_on&gt;&lt;when&gt;onAfter&lt;/when&gt;&lt;/sys_transform_script&gt;&lt;/record_update&gt;</payload>
+<payload_hash>1781688437</payload_hash>
+<remote_update_set display_value="K19_Localization_Demo">f40e7d908970f700964f2701e123a079</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>maint</sys_created_by>
+<sys_created_on>2019-04-10 01:23:26</sys_created_on>
+<sys_id>740e7d908970f700964f2701e123a07b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16a04d0b4f60000001</sys_recorded_at>
+<sys_updated_by>maint</sys_updated_by>
+<sys_updated_on>2019-04-10 01:23:26</sys_updated_on>
+<table/>
+<target_name>onAfter</target_name>
+<type>Transform Script</type>
+<update_domain>global</update_domain>
+<update_guid>784cfd502870f700341401d553f60e10</update_guid>
+<update_guid_history>784cfd502870f700341401d553f60e10:1781688437,f53afd103670f700d08fb0a7f81d58c0:1771396025,d058f9dc3e30f7004c70115be5d9cfb2:567942669,63d6bd9ce130f7005d001acb6722727c:2084150077,ddb2391ce930f70017f245252aa22179:-1207077128,4880b1d8d330f7005fdaf99f71fc1ffb:-19464006,b58999dca5fcb700b0b0c86be10d9e3a:-416024310,c5a511dc3afcb7005df5b7b9401fc988:1875014254,81e3959c8bfcb7006e6332cbc174c29d:1160071559,34b3dd9872fcb700ca964929f8ea7e69:-944790137,a6d61dc87978b70025782756bb113e2d:199909535,f83695c88578b700785abfbe08e7c5ca:-645135937,15ab81c0ec78b70005f1fd8ad5fe8187:-1513831528,026309cce838b700fc159a1435fdc403:1767574626,826309cc4038b7003782f52eaa50dd02:147132727</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_data_source_e40e704c8938b700964f2701e123a0ac</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_data_source"><sys_data_source action="INSERT_OR_UPDATE"><category/><connection_timeout>0</connection_timeout><connection_url>attachment://sys_data_source:e40e704c8938b700964f2701e123a0ac/</connection_url><connection_url_parameters/><csv_delimiter/><database_name/><database_port/><expand_node_children>false</expand_node_children><file_path/><file_retrieval_method>Attachment</file_retrieval_method><format>Excel</format><glide_keystore>false</glide_keystore><header_row>1</header_row><import_set_table_label/><import_set_table_name>u_choice_translated</import_set_table_name><instance_name/><jdbc_password/><jdbc_server/><jdbc_user_name/><jpath_root_node/><last_run_database_field/><last_run_datetime/><ldap_target/><maximum_rows/><mid_server/><name>Choice Translated</name><oracle_port>1521</oracle_port><oracle_sid>orcl</oracle_sid><properties>language=fr;it</properties><query>All Rows from Table</query><query_timeout>0</query_timeout><scp_authentication>Username and Password</scp_authentication><scp_password/><scp_port/><scp_server/><scp_user_name/><sheet_number>1</sheet_number><sql_statement/><ssh_keyfile_path/><sys_class_name>sys_data_source</sys_class_name><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-09 02:06:18</sys_created_on><sys_id>e40e704c8938b700964f2701e123a0ac</sys_id><sys_mod_count>6</sys_mod_count><sys_name>Choice Translated</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_data_source_e40e704c8938b700964f2701e123a0ac</sys_update_name><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 00:19:47</sys_updated_on><table_name/><type>File</type><use_integrated_authentication>false</use_integrated_authentication><use_last_run_datetime>false</use_last_run_datetime><xpath_root_node/><zipped>false</zipped></sys_data_source></record_update>]]></payload>
+<payload_hash>1864715276</payload_hash>
+<remote_update_set display_value="K19_Localization_Demo">f40e7d908970f700964f2701e123a079</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>maint</sys_created_by>
+<sys_created_on>2019-04-10 01:23:26</sys_created_on>
+<sys_id>780e7d908970f700964f2701e123a07a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16a049d6dd60000001</sys_recorded_at>
+<sys_updated_by>maint</sys_updated_by>
+<sys_updated_on>2019-04-10 01:23:26</sys_updated_on>
+<table/>
+<target_name>Choice Translated</target_name>
+<type>Data Source</type>
+<update_domain>global</update_domain>
+<update_guid>547fa5982c30f700c61edfe2f9a9dc48</update_guid>
+<update_guid_history>547fa5982c30f700c61edfe2f9a9dc48:1864715276,51cd6d181a30f700a48ad92fd9a73341:1419349634,d68ae9184030f700a4ec7b753f055f58:-151284705,9b5a95502130f70062eb816864599da9:-946715587,9654d99c62fcb700f9fbc74e77a80d31:-1244003689,d3a34dd47dfcb700fe564e3612883b40:-441226285,ba3ef04cc338b700273e5f660d7672b6:-1662960440</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_transform_map_0f9563eeff701000dada1c57f27f9def</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_transform_map"&gt;&lt;sys_transform_map action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;copy_empty_fields&gt;false&lt;/copy_empty_fields&gt;&lt;create_new_record_on_empty_coalesce_fields&gt;false&lt;/create_new_record_on_empty_coalesce_fields&gt;&lt;enforce_mandatory_fields&gt;No&lt;/enforce_mandatory_fields&gt;&lt;name&gt;TXT Translated&lt;/name&gt;&lt;order&gt;100&lt;/order&gt;&lt;run_business_rules&gt;false&lt;/run_business_rules&gt;&lt;run_script&gt;true&lt;/run_script&gt;&lt;script&gt;&lt;![CDATA[var tbl = source.u_table_name;
+var fld = source.u_field_name;
+var doc = source.u_document_sys_id; 
+//var doc = source.u_document;
+
+// Build value field name
+var langArray = processingLanguage.split(';');
+var langToProcess = '';
+for(i=0;langArray &amp;&amp; i&lt;langArray.length;i++) {
+langToProcess = langArray[i];
+
+var lfn = 'u_value__' + langToProcess + '_';
+
+var fieldValid = gs.fieldExists(map.source_table, lfn);
+
+if (fieldValid) {
+   var value = source.getValue(lfn);
+   processTranslatedTextEntry(tbl, fld, doc, langToProcess, value);
+}
+}
+
+function processTranslatedTextEntry(tbl, fld, doc, lang, value) {
+   var tt = getTranslatedTextEntry(tbl, fld, doc, lang);
+   if (tt == null)
+      insertTranslatedTextEntry(tbl, fld, doc, lang, value);
+   else
+      updateTranslatedTextEntry(tt, value);
+
+   ignore = true;
+}
+
+function getTranslatedTextEntry(tbl, fld, doc, lang) {
+   var tt = new GlideRecord('sys_translated_text');
+   tt.addQuery('tablename', tbl);
+   tt.addQuery('fieldname', fld);
+   tt.addQuery('documentkey', doc);
+   tt.addQuery('language', lang);
+   tt.query();
+   if (tt.next())
+      return tt;
+
+   return null;
+}
+
+function insertTranslatedTextEntry(tbl, fld, doc, lang, value) {
+   var tt = new GlideRecord('sys_translated_text');
+   tt.initialize();
+   tt.tablename = tbl;
+   tt.fieldname = fld;
+   tt.documentkey = doc;
+   tt.language = lang;
+   tt.value = value;
+   tt.setWorkflow(false);
+   tt.insert();
+}
+
+function updateTranslatedTextEntry(tt, value) {
+   tt.value = value;
+   tt.setWorkflow(false);
+   tt.update();
+}]]&gt;&lt;/script&gt;&lt;source_table&gt;u_txt_translated&lt;/source_table&gt;&lt;sys_class_name&gt;sys_transform_map&lt;/sys_class_name&gt;&lt;sys_created_by&gt;myla.jordan&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2011-09-02 14:05:58&lt;/sys_created_on&gt;&lt;sys_id&gt;0f9563eeff701000dada1c57f27f9def&lt;/sys_id&gt;&lt;sys_mod_count&gt;11&lt;/sys_mod_count&gt;&lt;sys_name&gt;TXT Translated&lt;/sys_name&gt;&lt;sys_package display_value="I18N: Internationalization Translation helper" source="com.glide.i18n.translation_helper"&gt;084d0b5489203300964f2701e123a016&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_transform_map_0f9563eeff701000dada1c57f27f9def&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;maint&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2019-04-10 01:10:03&lt;/sys_updated_on&gt;&lt;target_table&gt;sys_translated_text&lt;/target_table&gt;&lt;/sys_transform_map&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-52821725</payload_hash>
+<remote_update_set display_value="K19_Localization_Demo">f40e7d908970f700964f2701e123a079</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>maint</sys_created_by>
+<sys_created_on>2019-04-10 01:23:26</sys_created_on>
+<sys_id>b00e7d908970f700964f2701e123a07b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16a04cb759a0000001</sys_recorded_at>
+<sys_updated_by>maint</sys_updated_by>
+<sys_updated_on>2019-04-10 01:23:26</sys_updated_on>
+<table/>
+<target_name>TXT Translated</target_name>
+<type>Table Transform Map</type>
+<update_domain>global</update_domain>
+<update_guid>f8fa7550f370f70062d20490f776a620</update_guid>
+<update_guid_history>f8fa7550f370f70062d20490f776a620:-52821725,0a72a858c5bcb700724579efac10470d:265244866,5e07ddc8c078b7002fdeb5eae042eb30:-1463393982,556595883b78b7005d22c52b23710dd8:1531537050,f502d5086878b7006af0131e6e25fa29:741295507,3d02d5089d78b7005486ac56d3594e27:-1508061345</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_data_source_b1eb3d508970f700964f2701e123a0cc</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_data_source"><sys_data_source action="INSERT_OR_UPDATE"><category/><connection_timeout>0</connection_timeout><connection_url>attachment://sys_data_source:b1eb3d508970f700964f2701e123a0cc/</connection_url><connection_url_parameters/><csv_delimiter/><database_name/><database_port/><expand_node_children>false</expand_node_children><file_path/><file_retrieval_method>Attachment</file_retrieval_method><format>Excel</format><glide_keystore>false</glide_keystore><header_row>1</header_row><import_set_table_label/><import_set_table_name>u_msg_translated</import_set_table_name><instance_name/><jdbc_password/><jdbc_server/><jdbc_user_name/><jpath_root_node/><last_run_database_field/><last_run_datetime/><ldap_target/><maximum_rows/><mid_server/><name>MSG Translated</name><oracle_port>1521</oracle_port><oracle_sid>orcl</oracle_sid><properties>language=fr;it</properties><query>All Rows from Table</query><query_timeout>0</query_timeout><scp_authentication>Username and Password</scp_authentication><scp_password/><scp_port/><scp_server/><scp_user_name/><sheet_number>1</sheet_number><sql_statement/><ssh_keyfile_path/><sys_class_name>sys_data_source</sys_class_name><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-10 01:14:37</sys_created_on><sys_id>b1eb3d508970f700964f2701e123a0cc</sys_id><sys_mod_count>1</sys_mod_count><sys_name>MSG Translated</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_data_source_b1eb3d508970f700964f2701e123a0cc</sys_update_name><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:14:57</sys_updated_on><table_name/><type>File</type><use_integrated_authentication>false</use_integrated_authentication><use_last_run_datetime>false</use_last_run_datetime><xpath_root_node/><zipped>false</zipped></sys_data_source></record_update>]]></payload>
+<payload_hash>-968713868</payload_hash>
+<remote_update_set display_value="K19_Localization_Demo">f40e7d908970f700964f2701e123a079</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>maint</sys_created_by>
+<sys_created_on>2019-04-10 01:23:26</sys_created_on>
+<sys_id>b40e7d908970f700964f2701e123a07a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16a04cff1cc0000001</sys_recorded_at>
+<sys_updated_by>maint</sys_updated_by>
+<sys_updated_on>2019-04-10 01:23:26</sys_updated_on>
+<table/>
+<target_name>MSG Translated</target_name>
+<type>Data Source</type>
+<update_domain>global</update_domain>
+<update_guid>e41c3d50fd70f700871b3234ecbb70c6</update_guid>
+<update_guid_history>e41c3d50fd70f700871b3234ecbb70c6:-968713868,a7fbf950ba70f7009c43933036d28cdb:-227251074</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_transform_script_655b9752c0a801654b7cd4604df5fd78</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_transform_script"&gt;&lt;sys_transform_script action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;map display_value="TRF Translated"&gt;6557e680c0a80165456fa1971622a6e8&lt;/map&gt;&lt;order&gt;100&lt;/order&gt;&lt;script&gt;&lt;![CDATA[/**
+ * For variables go to: http://docs.servicenow.com/?context=Import_Sets
+ *
+ * For each language insert a sys_choice entry (english is mapped directly)
+ **/
+
+// Build label/hint field names 
+var langArray = processingLanguage.split(';');
+var langToProcess = '';
+for(i=0;langArray &amp;&amp; i&lt;langArray.length;i++) {
+langToProcess = langArray[i];
+
+var lfn = 'u_label__' + langToProcess + '_';
+
+var fieldValid = gs.fieldExists(map.source_table, lfn);
+
+if (fieldValid) {
+   // New sys_choice for each language
+   var lang = new GlideRecord(map.target_table);
+   lang.initialize();
+   
+   // Map entries
+   var tme = new GlideRecord('sys_transform_entry');
+   tme.addQuery('map', map.sys_id);
+   tme.query();
+   while (tme.next()) {
+      if (tme.target_field != 'language')
+         lang.setValue(tme.target_field, source.getValue(tme.source_field));
+   }
+   lang.language = langToProcess;
+   lang.setValue('label', source.getValue(lfn));
+   lang.setWorkflow(false);
+   lang.insert();
+}
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_transform_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;myla.jordan&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2010-11-19 18:19:49&lt;/sys_created_on&gt;&lt;sys_id&gt;655b9752c0a801654b7cd4604df5fd78&lt;/sys_id&gt;&lt;sys_mod_count&gt;11&lt;/sys_mod_count&gt;&lt;sys_name&gt;onAfter&lt;/sys_name&gt;&lt;sys_package display_value="I18N: Internationalization Translation helper" source="com.glide.i18n.translation_helper"&gt;084d0b5489203300964f2701e123a016&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_transform_script_655b9752c0a801654b7cd4604df5fd78&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;maint&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2019-04-10 01:08:58&lt;/sys_updated_on&gt;&lt;when&gt;onAfter&lt;/when&gt;&lt;/sys_transform_script&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-2082621299</payload_hash>
+<remote_update_set display_value="K19_Localization_Demo">f40e7d908970f700964f2701e123a079</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>maint</sys_created_by>
+<sys_created_on>2019-04-10 01:23:26</sys_created_on>
+<sys_id>bc0e7d908970f700964f2701e123a07b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16a04ca74b90000001</sys_recorded_at>
+<sys_updated_by>maint</sys_updated_by>
+<sys_updated_on>2019-04-10 01:23:26</sys_updated_on>
+<table/>
+<target_name>onAfter</target_name>
+<type>Transform Script</type>
+<update_domain>global</update_domain>
+<update_guid>f0baf150cf70f7008feed425f8750ba6</update_guid>
+<update_guid_history>f0baf150cf70f7008feed425f8750ba6:-2082621299,dff69dc84778b700ccf59cd442ca9e7b:-1632923689,d17619c88778b7001781a994855861c8:446950873,557619c83d78b7006e308acd7a24c4c7:-1543993993</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_data_source_7ff291488978b700964f2701e123a02c</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_data_source"><sys_data_source action="INSERT_OR_UPDATE"><category/><connection_timeout>0</connection_timeout><connection_url>attachment://sys_data_source:7ff291488978b700964f2701e123a02c/</connection_url><connection_url_parameters/><csv_delimiter/><database_name/><database_port/><expand_node_children>false</expand_node_children><file_path/><file_retrieval_method>Attachment</file_retrieval_method><format>Excel</format><glide_keystore>false</glide_keystore><header_row>1</header_row><import_set_table_label/><import_set_table_name>u_txt_translated</import_set_table_name><instance_name/><jdbc_password/><jdbc_server/><jdbc_user_name/><jpath_root_node/><last_run_database_field/><last_run_datetime/><ldap_target/><maximum_rows/><mid_server/><name>TRT Translated</name><oracle_port>1521</oracle_port><oracle_sid>orcl</oracle_sid><properties>language=fr;it</properties><query>All Rows from Table</query><query_timeout>0</query_timeout><scp_authentication>Username and Password</scp_authentication><scp_password/><scp_port/><scp_server/><scp_user_name/><sheet_number>1</sheet_number><sql_statement/><ssh_keyfile_path/><sys_class_name>sys_data_source</sys_class_name><sys_created_by>maint</sys_created_by><sys_created_on>2019-04-09 03:37:52</sys_created_on><sys_id>7ff291488978b700964f2701e123a02c</sys_id><sys_mod_count>3</sys_mod_count><sys_name>TRT Translated</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_data_source_7ff291488978b700964f2701e123a02c</sys_update_name><sys_updated_by>maint</sys_updated_by><sys_updated_on>2019-04-10 01:12:24</sys_updated_on><table_name/><type>File</type><use_integrated_authentication>false</use_integrated_authentication><use_last_run_datetime>false</use_last_run_datetime><xpath_root_node/><zipped>false</zipped></sys_data_source></record_update>]]></payload>
+<payload_hash>104608373</payload_hash>
+<remote_update_set display_value="K19_Localization_Demo">f40e7d908970f700964f2701e123a079</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>maint</sys_created_by>
+<sys_created_on>2019-04-10 01:23:26</sys_created_on>
+<sys_id>f00e7d908970f700964f2701e123a07a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16a04cd9c2e0000001</sys_recorded_at>
+<sys_updated_by>maint</sys_updated_by>
+<sys_updated_on>2019-04-10 01:23:26</sys_updated_on>
+<table/>
+<target_name>TRT Translated</target_name>
+<type>Data Source</type>
+<update_domain>global</update_domain>
+<update_guid>9b7bf9500370f700b602ee68c4396261</update_guid>
+<update_guid_history>9b7bf9500370f700b602ee68c4396261:104608373,807bb9509b70f700474f022cf3dd6ccc:-1769162535,1db389d451fcb7005f74b11183b1e7fd:756980334,d03311485b78b7002a82971247a445d4:1718877027</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_transform_script_6555f12cc0a801656b7f229fe351f441</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_transform_script"&gt;&lt;sys_transform_script action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;map display_value="MSG Translated"&gt;65544086c0a80165715b9ba90df6168c&lt;/map&gt;&lt;order&gt;100&lt;/order&gt;&lt;script&gt;&lt;![CDATA[/**
+ * For variables go to: http://docs.servicenow.com/?context=Import_Sets
+ *
+ * For each language insert a sys_choice entry (english is mapped directly)
+ **/
+// Build label/hint field names 
+var langArray = processingLanguage.split(';');
+var langToProcess = '';
+for(i=0;langArray &amp;&amp; i&lt;langArray.length;i++) {
+langToProcess = langArray[i];
+
+
+var mfn = 'u_message__' + langToProcess + '_';
+
+var fieldValid = gs.fieldExists(map.source_table, mfn);
+
+if (fieldValid) {
+   // New sys_choice for each language
+   var lang = new GlideRecord(map.target_table);
+   lang.initialize();
+   
+   // Map entries
+   var tme = new GlideRecord('sys_transform_entry');
+   tme.addQuery('map', map.sys_id);
+   tme.query();
+   while (tme.next()) {
+      if (tme.target_field != 'language')
+         lang.setValue(tme.target_field, source.getValue(tme.source_field));
+   }
+   lang.language = langToProcess;
+   lang.setValue('message', source.getValue(mfn));
+   lang.setWorkflow(false);
+   lang.insert();
+}
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_transform_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;myla.jordan&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2010-11-19 18:13:05&lt;/sys_created_on&gt;&lt;sys_id&gt;6555f12cc0a801656b7f229fe351f441&lt;/sys_id&gt;&lt;sys_mod_count&gt;10&lt;/sys_mod_count&gt;&lt;sys_name&gt;onAfter&lt;/sys_name&gt;&lt;sys_package display_value="I18N: Internationalization Translation helper" source="com.glide.i18n.translation_helper"&gt;084d0b5489203300964f2701e123a016&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_transform_script_6555f12cc0a801656b7f229fe351f441&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;maint&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2019-04-10 01:10:27&lt;/sys_updated_on&gt;&lt;when&gt;onAfter&lt;/when&gt;&lt;/sys_transform_script&gt;&lt;/record_update&gt;</payload>
+<payload_hash>916335993</payload_hash>
+<remote_update_set display_value="K19_Localization_Demo">f40e7d908970f700964f2701e123a079</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>maint</sys_created_by>
+<sys_created_on>2019-04-10 01:23:26</sys_created_on>
+<sys_id>f80e7d908970f700964f2701e123a07b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16a04cbd3100000001</sys_recorded_at>
+<sys_updated_by>maint</sys_updated_by>
+<sys_updated_on>2019-04-10 01:23:26</sys_updated_on>
+<table/>
+<target_name>onAfter</target_name>
+<type>Transform Script</type>
+<update_domain>global</update_domain>
+<update_guid>2a0bf550a270f700234bd1066117c673</update_guid>
+<update_guid_history>2a0bf550a270f700234bd1066117c673:916335993,bb17ddc84878b700c30e32138f7e1ae3:624286497,638659c84d78b700050da38d138a3d19:-748541839,e38659c89278b700f7f237b2e8250c18:1223987329</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_include_2c52b4fcc0a801655a172610b6b8d4c5</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;public&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;global.TranslationLoader&lt;/api_name&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description&gt;A.  Create files to send to translators...&amp;#13;
+			Start with a freshly zbooted instance and run the following:&amp;#13;
+			&amp;#13;
+			var tl = new TranslationLoader();&amp;#13;
+			tl.process();&amp;#13;
+			&amp;#13;
+			OR&amp;#13;
+			&amp;#13;
+			var tl = new TranslationLoader();&amp;#13;
+			var pluginArray = ['com.glideapp.custom_charts', 'com.snc.hr_management'];&amp;#13;
+			tl.process(pluginArray);&amp;#13;
+			&amp;#13;
+			1.  Loads default plugins (an array of unpublished but used plugins)&amp;#13;
+			2.  Loads array of unpublished plugins as provided via script&amp;#13;
+			- processing only occurs on published plugins.  &amp;#13;
+			- If translations are required for an unpublished plugin then pass that plugin id into this processing script by means of the pluginArray&amp;#13;
+			3.  Loads all inactive published plugins&amp;#13;
+			4.  For each plugin:&amp;#13;
+			Grab new modules&amp;#13;
+			Grab new tables (from above module definition)&amp;#13;
+			Render table form/list&amp;#13;
+			5.  Copy sys_choice, sys_documentation, sys_translated, sys_ui_message to the corresponding translation tables&amp;#13;
+			- gives us english entries for each record&amp;#13;
+			6.  Loads all of our existing translation plugins so we have the data in place to build a master sheet&amp;#13;
+			translated fields -&amp;gt; u_trf_translations&amp;#13;
+			messages -&amp;gt; u_msg_translations&amp;#13;
+			sys_documentation -&amp;gt; u_gmld_translations&amp;#13;
+			sys_choice -&amp;gt; u_choice_translations&amp;#13;
+			7.  Attachement records are created for each translation table&amp;#13;
+			&amp;#13;
+			Processing takes 3-4 hours&amp;#13;
+			&amp;#13;
+			B.  Process files from translators&amp;#13;
+			Copy files from translators into a directory on your local machine (/translations)&amp;#13;
+			Start with a freshly zbooted instance and run the following&amp;#13;
+			&amp;#13;
+			var tl = new TranslationLoader();&amp;#13;
+			tl.setDebug(true);&amp;#13;
+			tl.setImportPath('/trans/import/');&amp;#13;
+			tl.setExportPath('/trans/export/');&amp;#13;
+			tl.importTranslations();&amp;#13;
+			&amp;#13;
+			1.  Loads the translated files&amp;#13;
+			2.  Transforms to sys_choice, sys_documentation, sys_translated and sys_ui_message&amp;#13;
+			3.  For each language export each table to excel&amp;#13;
+			Result is excel files matching the below file naming convention&amp;#13;
+			4.  Check these excel files into each language plugin&amp;#13;
+			&amp;#13;
+			File naming convention &amp;#13;
+			sys_choice_&amp;lt;country&amp;gt;.xls&amp;#13;
+			sys_translated_&amp;lt;country&amp;gt;.xls&amp;#13;
+			sys_documentation_&amp;lt;country&amp;gt;.xls&amp;#13;
+			sys_ui_message_&amp;lt;country_.xls&lt;/description&gt;&lt;name&gt;TranslationLoader&lt;/name&gt;&lt;script&gt;&lt;![CDATA[gs.include("DataSourceLoader");
+gs.include("ImportSetCleaner");
+
+var TranslationLoader = Class.create();
+TranslationLoader.prototype = {
+    initialize: function () {
+        this.languageAbbreviation;
+        this.languageName;
+        this.choiceLoader;
+        this.docLoader;
+        this.transLoader;
+        this.msgLoader;
+        this.txtLoader;
+
+        // Default plugins
+        this.defaultPluginArray;
+        this.setupDefaultPluginArray();
+
+        // Mapping
+        this.choiceFields = new Object();
+        this.docFields = new Object();
+        this.transFields = new Object();
+        this.msgFields = new Object();
+        this.txtFields = new Object();
+        this.setupMapping();
+
+        // Modules
+        this.moduleChk = new Object();
+
+        // Debug
+        this.debug = false;
+
+        // Process?  Do we process modules after plugin activation
+        this.moduleProcessing = true;
+
+        // Read from File System (Default)
+        this.importPath = '/translations/translations_import/';
+
+        // Write to File System
+        this.exportPath = '/translations/translations_export/';
+        this.writeToFileSystem = false;
+
+        // Send messages to Worker if available
+        this.worker = null;
+    },
+
+    process: function(pluginArray) {
+        // Get initial counts
+        this.getCounts();
+
+        // Turn on Translate and Learn
+        gs.setProperty('glide.translate.learn', true);
+
+        // Create English Language Choices
+        //this.createEnglishLanguageChoices();
+
+        // Process modules (forms/lists) active by default
+        //this.processModules(true);
+
+        // Load default plugins
+        //this.loadNamedPlugins(this.defaultPluginArray);
+
+        // Load plugins (provided by user)
+        //if (typeof pluginArray != 'undefined')
+        //    this.loadNamedPlugins(pluginArray);
+
+        // Load plugins
+        //this.loadPlugins();
+
+        // Process UI Pages
+        //this.processUIPages();
+
+        // Gauges
+        //this.processGauges();
+
+        // Create entries for all translated_field type fields
+		gs.info('start processing TRF:');
+        this.createTranslatedFieldEntries();
+
+        // Create entries in sys_translatedtxt_translations for all
+        // translated_text/translated_html type fields
+        // btw - these don't have english entries - producing english
+        // for translators only
+		gs.info('start processing TRT:');
+        this.createTranslatedTextEntries();
+
+        // Turn off Translate and Learn
+        gs.setProperty('glide.translate.learn', false);
+
+        // Create English Entries for all choices, doc, translated and messages
+		gs.info('start transfer of all english strings:');
+        this.transferEnglishTranslations();
+
+        // Load Translations
+        //this.loadLanguages(true);
+
+        // Get final counts
+        //this.getCounts();
+
+        // Pre-export Cleanup
+        //this.preExportCleanup();
+		gs.info('end of processing:');
+    },
+
+    importTranslations: function() {
+        // Make sure we cleanup
+        this.cleanupTranslations();
+
+        // Import Translated Files
+        this.importFiles();
+
+        // Create/Populate Document Key Sys ID
+        this.populateDocumentSysID();
+
+        // Nuke Document Key Sys ID
+        this.deleteDocumentSysID();
+    },
+
+    importFiles: function() {
+        var dir = new Packages.java.io.File(this.importPath);
+        var dirs = dir.listFiles();
+        for (var i = 0; i &lt; dirs.length; i++) {
+            var langdir = dirs[i];
+            if (langdir.isDirectory()) {
+                this.languageAbbreviation = this.getLanguageCodeFromFile(langdir.getName());
+                this.choiceLoader = this.loadFile(langdir, 'sys_choice_translations', 'u_choice_translated');
+                this.docLoader = this.loadFile(langdir, 'sys_documentation_translations', 'u_gmld_translated');
+                this.transLoader = this.loadFile(langdir, 'sys_translated_translations', 'u_trf_translated');
+                this.msgLoader = this.loadFile(langdir, 'sys_ui_message_translations', 'u_msg_translated');
+                this.txtLoader = this.loadFile(langdir, 'sys_translatedtxt_translations', 'u_txt_translated');
+
+                // Transform
+                this.transformLanguage(true);
+            }
+        }
+    },
+
+    transferEnglishTranslations: function() {
+        //Turn the cache flush off for this session
+        GlideSession().get().setCacheFlush(false);
+        GlideSession().get().setWorkflow(false);
+
+        this.transferEnglishTranslation('sys_choice', 'sys_choice_translations', this.choiceFields);
+        this.transferEnglishTranslation('sys_documentation', 'sys_documentation_translations', this.docFields);
+        this.transferEnglishTranslation('sys_translated', 'sys_translated_translations', this.transFields);
+        this.transferEnglishTranslation('sys_ui_message', 'sys_ui_message_translations', this.msgFields);
+
+        // Flush the cache and then turn cache flushing back on for this session
+        GlideCacheManager.flush();
+        GlideSession().get().setCacheFlush(true);
+        GlideSession().get().setWorkflow(true);
+    },
+
+    transferEnglishTranslation: function(source, destination, fields) {
+        var t = new GlideRecord(source);
+		t.addEncodedQuery('sys_created_onONToday@javascript:gs.beginningOfToday()@javascript:gs.endOfToday()');
+        t.query();
+        while (t.next()) {
+            var trans = new GlideRecord(destination);
+            trans.initialize();
+
+            var td =  new GlideTableDescriptor(t.getRecordClassName());
+            var tda = td.getSchema().keySet().toArray();
+            for (var i = 0; i != tda.length; i++) {
+                var fld = tda[i];
+                if (fields[fld.toString()])
+                    trans.setValue(fld.toString(), t.getValue(fld));
+            }
+            trans.english_label = t.label;
+            if (source == 'sys_choice')
+                trans.english_hint = t.hint;
+
+            if (source == 'sys_documentation') {
+                trans.english_plural = t.plural;
+                trans.english_hint = t.hint;
+                trans.english_help = t.help;
+            }
+
+            if (source == 'sys_ui_message')
+                trans.english_message = t.message;
+
+            trans.setWorkflow(false);
+            trans.insert();
+        }
+    },
+
+    createEnglishLanguageChoices: function() {
+        var sysLanguage = new GlideRecord('sys_language');
+        sysLanguage.query();
+        while (sysLanguage.next()) {
+            var choice = new GlideRecord('sys_choice');
+            choice.addQuery('element', 'preferred_language');
+            choice.addQuery('language', 'en');
+            choice.addQuery('value', sysLanguage.id);
+            choice.query();
+            if(!choice.next()) {
+                choice.initialize();
+                choice.name = 'sys_user';
+                choice.element = 'preferred_language';
+                choice.language = 'en';
+                choice.value = sysLanguage.id;
+                choice.inactive = false;
+                choice.label = sysLanguage.name;
+                choice.insert();
+            }
+        }
+    },
+
+    pluginActivation_activateLanguage: function(plugin) {
+        plugin = plugin.toString();
+        this.debug = true;
+        this.languageAbbreviation = this.getLanguageAbbreviation0(plugin);
+        var isExpressPlugin = plugin.indexOf(".express") &gt; 0;
+        var isExpressOffering = GlideUtil.isExpressInstance();
+
+        // If an Express instance tries to upgrade an Enterprise plugin even though
+        // an Express plugin exists, DO NOTHING
+        if (isExpressOffering &amp;&amp; !isExpressPlugin &amp;&amp; this.hasExpressPlugin(plugin))
+            return;
+
+        // If an Enterprise instance accidentally tries installing the Express language
+        // plugin, DO NOTHING
+        if (!isExpressOffering &amp;&amp; isExpressPlugin)
+            return;
+
+        // Create English Choice
+        new I18nUtils().createDefaultLanguageChoice(this.languageAbbreviation);
+
+        if (isExpressOffering &amp;&amp; isExpressPlugin)
+            this.pluginActivation_loadTranslationsEnterpriseThenExpress(plugin);
+        else
+            this.pluginActivation_loadTranslationsFromPlugin(plugin);
+
+        // Activate language choices (based upon active languages)
+        gs.print("Running activatePreferredLanguageChoices for " + this.languageAbbreviation);
+        new I18nUtils().activatePreferredLanguageChoices(this.languageAbbreviation);
+
+        // Activate timezone choices (based on currently active English timezone choices)
+        new I18nUtils().activateTimezoneChoices(this.languageAbbreviation);
+    },
+
+	hasExpressPlugin: function (plugin) {
+		var expressSuffix = ".express";
+        var pluginHasExpressSuffix = plugin.indexOf(expressSuffix) != -1;
+
+        
+        if (pluginHasExpressSuffix) {
+            return pm.getInstalledPlugin(plugin) != null;
+        } else {
+        	return pm.getInstalledPlugin(plugin + expressSuffix) != null;
+        }
+        
+       },
+
+
+    pluginActivation_loadTranslationsEnterpriseThenExpress: function (plugin) {
+        var expressSuffix = ".express";
+        var enterprisePluginId;
+        var expressPluginId;
+        var pluginHasExpressSuffix = plugin.indexOf(expressSuffix) == (plugin.length - expressSuffix.length);
+
+        if (pluginHasExpressSuffix) {
+            enterprisePluginId = plugin.substring(0, (plugin.length - expressSuffix.length));
+            expressPluginId = plugin;
+        } else {
+            enterprisePluginId = plugin;
+            expressPluginId = plugin + expressSuffix;
+        }
+
+		gs.print("Running Enterprise " + enterprisePluginId + " plugin first");
+        this.pluginActivation_loadTranslationsFromPlugin(enterprisePluginId);
+		gs.print("Running Express " + expressPluginId + " plugin second");
+        this.pluginActivation_loadTranslationsFromPlugin(expressPluginId);
+    },
+    
+    loadAppLanguageFiles: function(appPlugin) {
+		
+		appPlugin = appPlugin.toString();
+		
+		var gr = new GlideRecord('sys_language');
+		gr.query();
+		
+		while(gr.next()) {
+			var lName = gr.name.toLowerCase();
+			
+			if(lName.contains(' - '))
+				lName = lName.replace(' - ',/-/g);
+			else if(lName.contains(' '))
+				lName = lName.replaceAll(' ', '_');
+			
+			this.languageAbbreviation = this.getLanguageAbbreviation0('com.snc.i18n.'+lName);
+			
+			this.loadTranslationsFromAppPlugin(appPlugin);
+			gs.print('Completed loading application language files for:' + 'com.snc.i18n.'+lName);
+		}
+		
+		
+		
+	},
+	
+	loadTranslationsFromAppPlugin: function (plugin) {
+		this.importAppPluginLanguageFiles(plugin);
+		this.pluginActivation_transformLanguageFile();
+	},
+	
+	importAppPluginLanguageFiles: function(plugin) {
+		var lName = this.languageName;
+		this.choiceLoader = this.loadFromApp(plugin, 'sys_choice_' + lName, 'u_sys_choice');
+		this.docLoader = this.loadFromApp(plugin, 'sys_documentation_' + lName, 'u_sys_documentation');
+		this.transLoader = this.loadFromApp(plugin, 'sys_translated_' + lName, 'u_sys_translated');
+		this.msgLoader = this.loadFromApp(plugin, 'sys_ui_message_' + lName, 'u_sys_ui_message');
+		this.txtLoader = this.loadFromApp(plugin, 'sys_translated_text_' + lName, 'u_sys_translated_text');
+	},
+	
+	loadFromApp: function (plugin, identifier, stageTable) {
+		var isgr;
+		
+		try {
+			
+			var resource = '/update/translations/'+this.languageName+'/' + identifier + '.xlsx';
+			var fs = SNC.PluginResources.openStream(plugin, resource);
+			var ds = this.createPluginI18nDataSource(fs, resource, stageTable);
+			var loader = new GlideImportSetLoader();
+			var dsgr = ds.getDataSourceGR();
+			// Once we have the data source then update a couple of things
+			// set the connection_url as it is needed to getFile later
+			dsgr.connection_url = "attachment://sys_data_source:" + dsgr.sys_id + "/";
+			// set dynamic resize to prevent truncation and language
+			dsgr.properties = 'dynamic_field_resize=true,language=' + this.languageAbbreviation;
+			// get and set language property
+			dsgr.setWorkflow(false);
+			dsgr.update();
+			isgr = loader.getImportSetGr(dsgr);
+			loader.loadImportSetTable(isgr, dsgr);
+		} catch(ex) {
+			gs.print('Exception loading language file for app :' + plugin + ' for the language: ' + this.languageName);
+		}
+		
+		return isgr;
+	},
+
+    pluginActivation_loadTranslationsFromPlugin: function (plugin) {
+        // Import/Transform Language files
+        gs.print("Running " + plugin + " Imports... this may take a while");
+        this.pluginActivation_importPluginLanguage(plugin);
+        this.pluginActivation_transformLanguageFile();
+    },
+
+    pluginActivation_importPluginLanguage: function (plugin) {
+        var lName = this.languageName;
+        this.choiceLoader = this.loadPlugin(plugin, 'sys_choice_' + lName, 'u_sys_choice');
+        this.docLoader = this.loadPlugin(plugin, 'sys_documentation_' + lName, 'u_sys_documentation');
+        this.transLoader = this.loadPlugin(plugin, 'sys_translated_' + lName, 'u_sys_translated');
+        this.msgLoader = this.loadPlugin(plugin, 'sys_ui_message_' + lName, 'u_sys_ui_message');
+        this.txtLoader = this.loadPlugin(plugin, 'sys_translated_text_' + lName, 'u_sys_translated_text');
+    },
+
+    load: function (plugin) {
+        this.logger("Translation Log - Load Language: " + plugin.id + " - " + gs.nowDateTime());
+
+        var pname = plugin.id;
+        var lName = this.languageName;
+        this.choiceLoader = this.loadPlugin(pname, 'sys_choice_' + lName, 'u_choice_translations');
+        this.docLoader = this.loadPlugin(pname, 'sys_documentation_' + lName, 'u_gmld_translations');
+        this.transLoader = this.loadPlugin(pname, 'sys_translated_' + lName, 'u_trf_translations');
+        this.msgLoader = this.loadPlugin(pname, 'sys_ui_message_' + lName, 'u_msg_translations');
+        this.txtLoader = this.loadPlugin(pname, 'sys_translated_text_' + lName, 'u_txt_translations');
+    },
+
+    loadPlugin: function (plugin, identifier, stageTable) {
+        var resource = '/update/' + identifier + '.xlsx';
+        var fs = SNC.PluginResources.openStream(plugin, resource);
+        var ds = this.createPluginI18nDataSource(fs, resource, stageTable);
+        var loader = new GlideImportSetLoader();
+        var dsgr = ds.getDataSourceGR();
+        // Once we have the data source then update a couple of things
+        // set the connection_url as it is needed to getFile later
+        dsgr.connection_url = "attachment://sys_data_source:" + dsgr.sys_id + "/";
+        // set dynamic resize to prevent truncation and language
+        dsgr.properties = 'dynamic_field_resize=true,language=' + this.languageAbbreviation;
+        // get and set language property
+        dsgr.setWorkflow(false);
+        dsgr.update();
+        var isgr = loader.getImportSetGr(dsgr);
+        loader.loadImportSetTable(isgr, dsgr);
+
+        this.logger('Translation Log - Loaded ' + resource + ': ' + gs.nowDateTime());
+
+        return isgr;
+    },
+
+    createPluginI18nDataSource: function (fs, resource, tablename) {
+        return GlideDataSource.createAttachedDataSource(fs, resource, resource, tablename);
+    },
+
+    pluginActivation_importLanguageFile: function(dir) {
+        var lName = this.languageName;
+        this.choiceLoader = this.loadFile(dir, 'sys_choice_' + lName, 'u_sys_choice');
+        this.docLoader = this.loadFile(dir, 'sys_documentation_' + lName, 'u_sys_documentation');
+        this.transLoader = this.loadFile(dir, 'sys_translated_' + lName, 'u_sys_translated');
+        this.msgLoader = this.loadFile(dir, 'sys_ui_message_' + lName, 'u_sys_ui_message');
+        this.txtLoader = this.loadFile(dir, 'sys_translated_text_' + lName, 'u_sys_translated_text');
+    },
+
+    pluginActivation_transformLanguageFile: function() {
+        this.transform('Sys Choice', this.choiceLoader, false);
+        this.transform('Sys Documentation', this.docLoader, false);
+        this.transform('Sys Translated', this.transLoader, false);
+        this.transform('Sys UI Message', this.msgLoader, false);
+        this.transform('Sys Translated Text', this.txtLoader, false);
+    },
+
+    loadLanguages: function(transform) {
+        var languagePlugins = new GlideRecord('v_plugin');
+        languagePlugins.addQuery('id', 'STARTSWITH', 'com.snc.i18n');
+        languagePlugins.addQuery('state', 'published');
+        languagePlugins.query();
+        while (languagePlugins.next()) {
+            // Load
+            this.languageAbbreviation = this.getLanguageAbbreviation(languagePlugins);
+            this.load(languagePlugins);
+
+            // Transform
+            if (transform)
+                this.transformLanguage(false);
+        }
+    },
+
+    loadFile: function(dir, identifier, stageTable) {
+        var file = this.findFile(dir, identifier, 'xlsx');
+        if (!file)
+            return;
+
+        var ds = this.createDataSource(file, stageTable);
+        var loader = new GlideImportSetLoader();
+        var dsgr = ds.getDataSourceGR();
+        // Once we have the data source then update a couple of things
+        // set the connection_url as it is needed to getFile later
+        dsgr.connection_url = "attachment://sys_data_source:" + dsgr.sys_id + "/";
+        // set dynamic resize to prevent truncation and language
+        dsgr.properties = 'dynamic_field_resize=true,language=' + this.languageAbbreviation;
+        // get and set language property
+        dsgr.setWorkflow(false);
+        dsgr.update();
+        var isgr = loader.getImportSetGr(dsgr);
+        loader.loadImportSetTable(isgr, dsgr);
+
+        this.logger('Translation Log - Loaded ' + file + ':  ' + gs.nowDateTime());
+
+        return isgr;
+    },
+
+    createDataSource: function(f, tablename) {
+        return GlideDataSource.createAttachedDataSource(f, f.getName(), tablename);
+    },
+
+    findFile: function(dir, fn, ext) {
+        this.logger('Translation Log - Find File:  ' + fn);
+
+        var d = dir.listFiles();
+        for (var i = 0; i &lt; d.length; i++) {
+            var n = d[i].getName();
+            if (n.indexOf(fn) == 0 &amp;&amp; n.endsWith(ext))
+                return d[i];
+        }
+    },
+
+    findMap: function(mapName) {
+        var mapid = "";
+        var map = new GlideRecord('sys_transform_map');
+        map.addQuery('name', mapName);
+        map.query();
+        if (map.next())
+            mapid = map.sys_id;
+
+        this.logger("Translation Log - Found Map:  " + mapid);
+
+        return mapid;
+    },
+
+    transformLanguage: function(translated) {
+        this.transform('Choice', this.choiceLoader, translated);
+        this.transform('GMLD', this.docLoader, translated);
+        this.transform('TRF', this.transLoader, translated);
+        this.transform('MSG', this.msgLoader, translated);
+        this.transform('TXT', this.txtLoader, translated);
+    },
+
+    transform: function(map, loader, translated) {
+        if (!loader)
+            return;
+
+        this.logger("Translation Log - Loader:  " + loader.number + "/" + loader.table_name);
+
+        var mapName = map;
+        if (translated)
+            mapName += ' Translated';
+        else
+            mapName += ' Translation Map';
+
+        this.logger("Translation Log - Transform " + mapName + ":  " + gs.nowDateTime());
+
+        var mapid = this.findMap(mapName);
+        if (mapid == "")
+            return;
+
+        var t = new GlideImportSetTransformer();
+        t.setMapID(mapid);
+        t.transformAllMaps(loader);
+
+        if (translated) {
+            // Clean up Import
+            var cleaner = new ImportSetCleaner(loader.table_name);
+            cleaner.setDataOnly(false);
+            cleaner.setDeleteMaps(false);
+            cleaner.clean();
+        }
+    },
+
+    getLanguageAbbreviation: function(languagePlugins) {
+        this.logger("Translation Log - getLanguageAbbreviation:  " + languagePlugins.id);
+
+        return this.getLanguageAbbreviation0(languagePlugins.id);
+    },
+
+    getLanguageAbbreviation0: function(pluginID) {
+        this.logger("Translation Log - getLanguageAbbreviation for Language Plugin:  " + pluginID);
+
+        this.languageName = pluginID.split('.')[3];
+        var lName = this.languageName.replaceAll('_', ' ');
+        lName = lName.replace(/-/g, ' - ');
+        var scpl = new GlideRecord('sys_language');
+        scpl.addQuery('name', lName);
+        scpl.query();
+        scpl.next();
+
+        this.logger("Translation Log - getLanguageAbbreviation:  " + scpl.id);
+
+        return scpl.id;
+    },
+
+    getLanguageCodeFromFile: function(fileName, extension) {
+        var end = fileName.length();
+        if (typeof extension != 'undefined')
+            end = fileName.indexOf(extension);
+
+        var lc = fileName.substring(end-2, end);
+        lc = lc.toLowerCase();
+        // zh_tw -&gt; zt Traditional Chinese
+        if (lc == 'tw')
+            lc = 'zt';
+
+        // fr-ca -&gt; fq French - Canada
+        if (lc == 'ca')
+            lc = 'fq';
+
+        // pt-br -&gt; pb Brazilian Portuguese
+        if (lc == 'br')
+            lc = 'pb';
+
+        // zh-cn -&gt; zh Simplified Chinese
+        if (lc == 'cn')
+            lc = 'zh';
+
+        return lc;
+    },
+
+    loadPlugins: function() {
+        var plugins = new GlideRecord('v_plugin');
+        plugins.addQuery('state', 'published');
+        plugins.addQuery('id', 'DOES NOT CONTAIN', 'i18n');
+        plugins.addQuery('active', 'inactive');
+        plugins.query();
+        while (plugins.next()) {
+            this.processPlugin(plugins.id);
+        }
+    },
+
+    loadNamedPlugins: function(pluginArray) {
+        for (var i = 0; i &lt; pluginArray.length; i++) {
+            this.processPlugin(pluginArray[i]);
+        }
+    },
+
+    processPlugin: function(pluginsid) {
+        if (pm.getActivePlugin(pluginsid) == null) {
+            this.logger("Translation Log - Loading plugin:  " + pluginsid);
+
+            pm.registerPlugin(pluginsid);
+        }
+
+        // After plugin activation look for new modules and render forms/lists
+        if (this.moduleProcessing)
+            this.processModules(false);
+    },
+
+    processModules: function(active) {
+        var sam = new GlideRecord('sys_app_module');
+        if (active)
+            sam.addQuery('active', true);
+        sam.query();
+        while (sam.next()) {
+            var samid = sam.sys_id.toString();
+            if (!this.moduleChk[samid]) {
+                // Process modules
+                var name = sam.name;
+                var application = sam.application.name;
+                if (!name.nil())
+                    this.renderForm(name);
+
+                var linkType = sam.link_type;
+                var query = sam.query;
+                if (linkType == 'SEPARATOR' &amp;&amp; !query.nil())
+                    gs.getMessage(query);
+
+                // Add module to processed list
+                this.moduleChk[samid] = true;
+            }
+        }
+    },
+
+    processUIPages: function() {
+        var suip = new GlideRecord('sys_ui_page');
+        suip.query();
+        while (suip.next()) {
+            var name = suip.name;
+            if (name.nil())
+                continue;
+
+            this.renderPage(suip);
+        }
+    },
+
+    processUIMacros: function() {
+        var suim = new GlideRecord('sys_ui_macro');
+        suim.addQuery('xml', 'CONTAINS', 'getMessage');
+        suim.query();
+        while (suim.next()) {
+            var rp = new GlideRenderProperties();
+            rp.setView("Default view", "Default view");
+            var jr = new GlideJellyRunner();
+            jr.setEscaping(true);
+            jr.setRenderProperties(rp);
+            jr.runFromTemplate(suim.name + ".xml");
+        }
+    },
+
+    processGauges: function() {
+        // Render Properties so we don't throw a bunch 'o errors
+        var rp = new GlideRenderProperties();
+        rp.setView("Default view", "Default view");
+
+        var script = '&lt;?xml version="1.0" encoding="utf-8" ?&gt;' +
+            '&lt;j:jelly trim="true" xmlns:j="jelly:core" xmlns:g="glide"&gt;' +
+            '&lt;g:gauge id="sys_id" width="800" height="600"/&gt;' +
+            '&lt;/j:jelly&gt;';
+
+        var gauge = new GlideRecord('sys_gauge');
+        gauge.addQuery('type', 'counts');
+        gauge.query();
+        while (gauge.next()) {
+            this.logger("Translation Log - Rendering Gauge:  " + gauge.name);
+
+            // Jelly Runner to hit the gauges
+            var jr = new GlideJellyRunner();
+            jr.setRenderProperties(rp);
+
+            var runScript = script.replace('sys_id', gauge.sys_id.toString());
+            jr.runFromScript(runScript);
+        }
+    },
+
+    renderForm: function(name) {
+        this.logger("Translation Log - Rendering Forms/Lists:  " + name);
+
+        // Variables
+        var gc = new GlideController();
+        var rp = new GlideRenderProperties();
+
+        // Render Form
+        var gf = new GlideForm(gc, name, 0);
+        gf.setRenderProperties(rp);
+        var f = gf.getRenderedPage();
+
+        // Render List
+        name += "_list";
+        gf = new GlideForm(gc, name, 0);
+        gf.setRenderProperties(rp);
+        var l = gf.getRenderedPage();
+    },
+
+    renderPage: function(sysUIPage) {
+        // RP
+        var RP = new GlideRenderProperties();
+        RP.setView("Default view", "Default view");
+
+        // Variables
+        var output = new Packages.org.apache.commons.jelly.XMLOutput.createXMLOutput(Packages.java.lang.System.out);
+        var gc = new GlideController();
+        gc.putGlobal("RP", RP);
+        var fgc = new GlideJellyContext(gc);
+
+        // Emit
+        var script = sysUIPage.getValue('html');
+        var clientScript = sysUIPage.getValue('client_script');
+        var emitter = new GlideEmitter(fgc, output);
+        emitter.emitJelly(script);
+        emitter.emitClientScriptWithEval(clientScript, GlideEmitter.PHASE1);
+    },
+
+    createTranslatedFieldEntries: function() {
+        var dic = new GlideRecord('sys_dictionary');
+        //dic.addQuery('internal_type', 'translated_field');
+		dic.addEncodedQuery('sys_created_onONToday@javascript:gs.beginningOfToday()@javascript:gs.endOfToday()^internal_type=translated_field');
+        dic.query();
+        while (dic.next()) {
+            var tbl = dic.name;
+            var fld = dic.element;
+
+            var tfr = new GlideRecord(tbl);
+            tfr.query();
+            while (tfr.next()) {
+                var value = tfr.getValue(fld);
+
+                if (!value)
+                    continue;
+
+                var lookup = new GlideRecord('sys_translated');
+                lookup.addQuery('name', tbl);
+                lookup.addQuery('element', fld);
+                lookup.addQuery('value', value);
+                lookup.query();
+                if (lookup.getRowCount() != 0)
+                    continue;
+
+                var tfrt = new GlideRecord('sys_translated');
+                tfrt.initialize();
+                tfrt.name = tbl;
+                tfrt.element = fld;
+                tfrt.value = value;
+                tfrt.label = value;
+                tfrt.language = 'en';
+                tfrt.setWorkflow(false);
+                tfrt.insert();
+            }
+        }
+    },
+
+    createTranslatedTextEntries: function(exportLanguage) {
+        var dic = new GlideRecord('sys_dictionary');
+		dic.addEncodedQuery('sys_created_onONToday@javascript:gs.beginningOfToday()@javascript:gs.endOfToday()^internal_type=translated_text^ORinternal_type=translated_html');
+		//dic.addEncodedQuery('sys_created_on&gt;javascript:gs.endOfLastMonth()^internal_type=translated_text^ORinternal_type=translated_html');
+        //dic.addQuery('internal_type', 'translated_text').addOrCondition('internal_type', 'translated_html');
+        dic.query();
+        while (dic.next()) {
+            var tbl = dic.name;
+            var fld = dic.element;
+            var c = new GlideRecord(tbl);
+            c.query();
+            while (c.next()) {
+                var value = c.getValue(fld);
+                if (!value)
+                    continue;
+
+                var doc = c.sys_id.toString();
+                var tt = this.getTranslatedTextEntry(tbl, fld, doc);
+                if (tt == null)
+                    this.insertTranslatedTextEntry(tbl, fld, doc, value);
+            }
+        }
+    },
+
+    getTranslatedTextEntry: function(tbl, fld, doc) {
+        var tt = new GlideRecord('sys_translatedtxt_translations');
+        tt.addQuery('tablename', tbl);
+        tt.addQuery('fieldname', fld);
+        tt.addQuery('documentkey', doc);
+        tt.query();
+        if (tt.next())
+            return tt;
+
+        return null;
+    },
+
+    insertTranslatedTextEntry: function(tbl, fld, doc, value) {
+        var tt = new GlideRecord('sys_translatedtxt_translations');
+        tt.initialize();
+        tt.tablename = tbl;
+        tt.fieldname = fld;
+        tt.documentkey = doc;
+        tt.documentkey_sys_id = doc;
+        tt.english_value = value;
+        tt.insert();
+    },
+
+    /**
+     *  Special processing
+     *  Create documentkey_sys_id field in sys_translated_text
+     *  Populate the field with the sys_id of the documentkey field
+     *  Export the translated files
+     *  Delete the documentkey_sys_id field in sys_translated_text
+     *  Note: the documentkey_sys_id field does not have to actually exist in the
+     *            sys_translated_text table (for customers)
+     *        we need it only for processing of translation files
+     *        if the documentkey_sys_id exists in our translation files then we
+     *            can use it for coalesce when a language plugin is activated
+     */
+    populateDocumentSysID: function() {
+        this.createDocumentSysID();
+
+        var tt = new GlideRecord('sys_translated_text');
+        tt.query();
+        while (tt.next()) {
+            tt.documentkey_sys_id = tt.documentkey.toString();
+            tt.setWorkflow(false);
+            tt.update();
+        }
+    },
+
+    createDocumentSysID: function() {
+        var tbl = 'sys_translated_text';
+        var lbl = 'Document Sys ID';
+        var cnm = 'documentkey_sys_id';
+        new GlideDBUtil.createElement(tbl, lbl, cnm, 'string', '40', null, true, false);
+    },
+
+    deleteDocumentSysID: function() {
+        var tbl = 'sys_translated_text';
+        var cnm = 'documentkey_sys_id';
+        gs.dropColumnQuick(tbl, cnm);
+        system.cacheFlush();
+    },
+
+    preExportCleanup: function() {
+        // A little cleanup before export!!!!
+        // If we don't have a Value OR English Label then delete
+        var sct = new GlideRecord('sys_choice_translations');
+        sct.addNullQuery('value');
+        sct.addNullQuery('english_label');
+        sct.query();
+        while (sct.next()) {
+            sct.deleteRecord();
+        }
+
+        // If we don't have English labels then set English Label to Value
+        sct = new GlideRecord('sys_choice_translations');
+        sct.addNullQuery('english_label');
+        sct.query();
+        while (sct.next()) {
+            sct.english_label = sct.value;
+            sct.update();
+        }
+
+        // Get rid of entries that don't have Labels
+        var sdt = new GlideRecord('sys_documentation_translations');
+        sdt.addNullQuery('english_label');
+        sdt.query();
+        sdt.deleteMultiple();
+
+        // Cleanup approval_engine entries
+        var sumt = new GlideRecord('sys_ui_message_translations');
+        sumt.addQuery('key', 'STARTSWITH', 'approval_engine');
+        sumt.query();
+        while (sumt.next()) {
+            var key = sumt.key;
+            var msg = sumt.english_message;
+            if (key.equals(msg))
+                sumt.deleteRecord();
+        }
+
+        // Remove Spaces
+        sumt = new GlideRecord('sys_ui_message_translations');
+        sumt.addQuery('key', ' ');
+        sumt.deleteMultiple();
+
+        // Remaining have message = key
+        sumt = new GlideRecord('sys_ui_message_translations');
+        sumt.addNullQuery('english_message');
+        sumt.query();
+        while (sumt.next()) {
+            sumt.english_message = sumt.key;
+            sumt.update();
+        }
+
+        var stt = new GlideRecord('sys_translated_translations');
+        stt.addQuery('name', 'sys_ui_view');
+        stt.addQuery('element', 'title');
+        stt.addQuery('value', 'STARTSWITH', 'Rpt');
+        stt.deleteMultiple();
+
+        stt = new GlideRecord('sys_translated_translations');
+        stt.addNullQuery('english_label');
+        stt.addNullQuery('value');
+        stt.deleteMultiple();
+
+        stt = new GlideRecord('sys_translated_translations');
+        stt.addQuery('english_label', ' ');
+        stt.addQuery('value', ' ');
+        stt.deleteMultiple();
+
+        stt = new GlideRecord('sys_translated_translations');
+        stt.addNullQuery('english_label');
+        stt.query();
+        while (stt.next()) {
+            stt.english_label = stt.value;
+            stt.update();
+        }
+
+        var sttt = new GlideRecord('sys_translatedtxt_translations');
+        sttt.addNullQuery('english_value');
+        sttt.deleteMultiple();
+    },
+
+    preExportNoChoice: function() {
+        var dic = new GlideRecord('sys_dictionary');
+        dic.addQuery('choice_table', 'sys_user');
+        dic.addQuery('choice_field', 'preferred_language');
+        dic.addQuery('name', 'sys_translated_text').addOrCondition('name', 'sys_ui_message');
+        dic.query();
+        while (dic.next()) {
+            dic.choice = "";
+            dic.setWorkflow(false);
+            dic.update();
+        }
+    },
+
+    createFixJobs: function(backPortTo) {
+        var pname = 'com.glide.i18n';
+        var p = pm.getInstalledPlugin(pname);
+        var path = p.getPath() + '/';
+        var dir = new Packages.java.io.File(path);
+        var fjName = 'import_translations_fix_tpl';
+        var fjBack = dir + '/update/' + 'import_' + backPortTo + '_translations.xml';
+        // Find fix job template file
+        var fromFile = this.findFile(dir, fjName, 'txt');
+    },
+
+    getFieldChoices: function(table, fieldsArray) {
+        var fieldChoices = new Array();
+        var fieldChoicesPK = new Array();
+        var td =  new GlideTableDescriptor(table);
+        var tda = td.getSchema().keySet().toArray();
+        for (var i = 0; i != tda.length; i++) {
+            var fld = tda[i];
+            if (!fld.startsWith('sys') &amp;&amp; !fieldsArray[fld])
+                fieldChoices.push(fld.toString());
+
+            if (fieldsArray[fld])
+                fieldChoicesPK.push(fld.toString());
+        }
+
+        var fc = new GlideChoiceList();
+        // Push in "PK" fields
+        for (var i = 0; i &lt; fieldChoicesPK.length; i++) {
+            fc.add(fieldChoicesPK[i], fieldChoicesPK[i]);
+        }
+        // Sort then push in remaining fields
+        fieldChoices.sort();
+        for (var i = 0; i &lt; fieldChoices.length; i++) {
+            fc.add(fieldChoices[i], fieldChoices[i]);
+        }
+
+        return fc;
+    },
+
+    activateLanguages: function() {
+        var languagePlugins = new GlideRecord('v_plugin');
+        languagePlugins.addQuery('id', 'STARTSWITH', 'com.snc.i18n');
+        languagePlugins.query();
+        while (languagePlugins.next()) {
+            this.activateLanguage(languagePlugins.id);
+        }
+    },
+
+    activateLanguage:  function(pluginsid) {
+        this.logger("Translation Log - Loading plugin:  " + pluginsid);
+
+        pm.registerPlugin(pluginsid);
+    },
+
+    setupMapping: function() {
+        // Choice mapping
+        this.choiceFields['name'] = true;
+        this.choiceFields['element'] = true;
+        this.choiceFields['value'] = true;
+        this.choiceFields['dependent_value'] = true;
+        this.choiceFields['sequence'] = true;
+        // Documentation mapping
+        this.docFields['name'] = true;
+        this.docFields['element'] = true;
+        this.docFields['url'] = true;
+        this.docFields['url_target'] = true;
+        // Translated mapping
+        this.transFields['name'] = true;
+        this.transFields['element'] = true;
+        this.transFields['value'] = true;
+        // Message mapping
+        this.msgFields['application'] = true;
+        this.msgFields['key'] = true;
+        // Translated Text mapping
+        this.txtFields['documentkey_sys_id'] = true;
+        this.txtFields['documentkey'] = true;
+        this.txtFields['tablename'] = true;
+        this.txtFields['fieldname'] = true;
+    },
+
+    setupDefaultPluginArray: function() {
+        this.defaultPluginArray = [
+            'com.glide.cmdb_reconcilliation',
+            'com.glide.context_help',
+            'com.glide.email_filter',
+            'com.glideapp.compliance',
+            'com.glideapp.monitor',
+            'com.snc.certification',
+            'com.snc.customer_registration',
+            'com.snc.discovery',
+            'com.snc.discovery.consolidation',
+            'com.snc.enterprise_cmdb.hostnames',
+            'com.snc.field_service_management',
+            'com.snc.ha',
+            'com.snc.runbook_automation',
+            'com.snc.runbook_automation.examples',
+            'com.snc.runbook_automation.vmware',
+            'com.snc.runbook_snc_instance',
+            'com.snc.territory_management'];
+    },
+
+    getCount: function(table) {
+        var tbl = new GlideRecord(table);
+        tbl.query();
+
+        this.logger("Translation Log - Row Counts for " + table + ":  " + tbl.getRowCount());
+    },
+
+    getCounts: function() {
+        this.getCount('sys_choice');
+        this.getCount('sys_documentation');
+        this.getCount('sys_translated');
+        this.getCount('sys_ui_message');
+        this.getCount('sys_translated_text');
+        this.getCount('sys_choice_translations');
+        this.getCount('sys_documentation_translations');
+        this.getCount('sys_translated_translations');
+        this.getCount('sys_ui_message_translations');
+        this.getCount('sys_translatedtxt_translations');
+    },
+
+    setDebug: function(debug) {
+        this.debug = debug;
+    },
+
+    setWorker: function(worker) {
+        this.worker = worker;
+    },
+
+    setImportPath: function(path) {
+        this.importPath = path;
+    },
+
+    setExportPath: function(path) {
+        if (!path.endsWith("/"))
+            path += "/";
+
+        this.exportPath = path;
+    },
+
+    setWriteToFileSystem: function(writeOut) {
+        this.writeToFileSystem = writeOut;
+    },
+
+    setModuleProcessing: function(moduleProcessing) {
+        this.moduleProcessing = moduleProcessing;
+    },
+
+    cleanupUpdates: function() {
+        var sux = new GlideRecord('sys_update_xml');
+        sux.deleteMultiple();
+    },
+
+    cleanupTranslations: function(language) {
+        //Turn the cache flush off for this session
+        GlideSession().get().setCacheFlush(false);
+        GlideSession().get().setWorkflow(false);
+
+        var tbls = new Array('sys_choice', 'sys_documentation', 'sys_translated', 'sys_translated_text', 'sys_ui_message');
+        for (var i = 0; i &lt; tbls.length; i++) {
+            var sc = new GlideRecord(tbls[i]);
+            sc.addQuery('language', '!=', 'en');
+            if (typeof language != 'undefined')
+                sc.addQuery('language', language);
+
+            sc.deleteMultiple();
+        }
+
+        // Flush the cache and then turn cache flushing back on for this session
+        GlideCacheManager.flush();
+        GlideSession().get().setCacheFlush(true);
+        GlideSession().get().setWorkflow(true);
+    },
+
+    cleanupLanguageTranslations: function(language) {
+        this.cleanupTranslations(language);
+    },
+
+    synchChoiceOrder: function (pluginId, tableName, fieldName) {
+        var language = this.getLanguageAbbreviation0(pluginId);
+
+
+        var gr = new GlideRecord("sys_choice");
+        gr.addQuery("name", tableName);
+        gr.addQuery("element", fieldName);
+        gr.addQuery("language", language);
+        gr.query();
+
+        var valArray = {};
+        while (gr.next()) {
+            var order = valArray[gr.value];
+            if (order === null || typeof order === 'undefined') {
+                var englishType = new GlideRecord("sys_choice");
+                englishType.addQuery("name", tableName);
+                englishType.addQuery("element", fieldName);
+                englishType.addQuery("language", "en");
+                englishType.addQuery("value", gr.value);
+                englishType.query();
+
+                if (englishType.next()) {
+                    valArray[gr.value] = englishType.sequence;
+                    order = englishType.sequence;
+                } else {
+                    valArray[gr.value] = "delete";
+                    order = "delete";
+                }
+            }
+
+            if (order == "delete") {
+                gr.deleteRecord();
+            } else if (gr.sequence != order) {
+                gr.sequence = order;
+                gr.update();
+            }
+        }
+    },
+
+    logger: function(message) {
+        if (this.debug)
+            gs.log(message);
+
+        if (this.worker != null)
+            worker.addMessage(message);
+    },
+
+    type: "TranslationLoader"
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;myla.jordan&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2010-11-08 16:33:15&lt;/sys_created_on&gt;&lt;sys_id&gt;2c52b4fcc0a801655a172610b6b8d4c5&lt;/sys_id&gt;&lt;sys_mod_count&gt;278&lt;/sys_mod_count&gt;&lt;sys_name&gt;TranslationLoader&lt;/sys_name&gt;&lt;sys_package display_value="I18N: Internationalization" source="com.glide.i18n"&gt;430dcbd089203300964f2701e123a06c&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_2c52b4fcc0a801655a172610b6b8d4c5&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;maint&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2019-04-10 01:23:10&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-759215809</payload_hash>
+<remote_update_set display_value="K19_Localization_Demo">f40e7d908970f700964f2701e123a079</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>maint</sys_created_by>
+<sys_created_on>2019-04-10 01:23:26</sys_created_on>
+<sys_id>fc0e7d908970f700964f2701e123a07a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>16a04d776800000001</sys_recorded_at>
+<sys_updated_by>maint</sys_updated_by>
+<sys_updated_on>2019-04-10 01:23:26</sys_updated_on>
+<table/>
+<target_name>TranslationLoader</target_name>
+<type>Script Include</type>
+<update_domain>global</update_domain>
+<update_guid>f0fdb990b970f700b53f80ef4835b2db</update_guid>
+<update_guid_history>f0fdb990b970f700b53f80ef4835b2db:-759215809,98c4ac9822bcb7009536f1074352138f:-8708169,c0d7550ca778b7000bd7fd053f1198a9:-1854354397,77ff67caaa2cf300bc8ef398b71263d4:-418629205,fe5fe7547bec3300315cbe1110767fc2:991600187,b65fe754c1ec330088b4e6406e55f7bf:-855845189</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
