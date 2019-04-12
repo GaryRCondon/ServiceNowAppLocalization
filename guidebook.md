@@ -9,57 +9,19 @@ discuss some of the best practices, gotchas, challenges and nuances of
 delivering and deploying global apps.  
 
 ## Workshop dependencies
- * New York Instance and appropriate credentials
+ * An available Instance and appropriate credentials
  * `I18N: Internationalization` plugin
  * `I18N: Internationalization Translation helper` plugin
  * An installed language plugin (can take 3-4 hours to install if not pre-installed)
  * Access to or pre-application of the `K19_Localization_Demo.xml` update set [Available here](https://github.com/GaryRCondon/ServiceNowAppLocalization/blob/master/K19_Localization_Demo.xml)
 
 
-
-### This Workshop is divided into the following sections:
-### Section 1: Introduction to ServiceNow i18n features
-1. Log into your instance and verify that you have a language plugin installed
-1. Create a sample application in Studio based on a doctor's waiting room analogy
-1. Populate the waiting room application with field types representative of ServiceNow internationalization features
-1. Show i18n plugin structure and how to change locale
-
-### Section 2: Export and translate the UI features
-1. Locate your app's UI features in the localization tables
-1. Export and 'translate' the user-interface features
-1. Import and transform the translated fields back into your application
-1. Switch locale and create a new record
-
-### Section 3: Translate a UI Page
-1. Create a simple new UI page
-1. Change locale and view the new UI page
-1. Wrap the user-facing messages in appropriate calls
-1. Create the corresponding sys_ui_message entry
-1. Create a translated version of the key
-1. Switch locale and view the UI page
-
-### Section 4: Translate a Portal Widget
-1. Navigate to Widget Editor and view the Hello World 1 widget
-1. Switch to another locale and review the widget outputs
-1. Clone Hello World 1 and review the hard-coded features
-1. Update HTML Template to externalize the string and include a hard-coded string
-1. Update the Client Script
-1. Update the JSON demo Data
-1. Quiz
-1. Create the necessary keys
-1. Discuss some Best Practices
-
-### Section 5: TranslationLoader Script Include
-1. Navigate to the script include
-2. Show the TraslationLoader Script
-3. Run the script in the background
-4. Show the generated outputs in the tables
-5. Show how to export the generated outputs and re-import
-
-### Section 6: Lessons learned from analyzing DevOps
-
-
 ## Section 1: Introduction to ServiceNow i18n features
+
+### Section Goal:
+In this section we will verify that we have a language plugin installed and associated dependencies, create a simple application that demonstrates some of the ServiceNow Platform internationalization features (specifically the language tables) and take a look at our application from the perspective of another locale.
+
+
 1. Navigate to the unique instance URL provided to you.
 
 1. Log into your instance and verify that you have a language plugin installed
@@ -100,6 +62,10 @@ delivering and deploying global apps.
   ![](./images/SystemDefaultTranslations.png)
 
 ## Section 2: Export and translate the UI features
+
+### Section Goal:
+Here we will demonstrate how to locate your app's UI features in the localization tables, export and 'translate' your App's UI features, import and transform the translated fields back into your application, and take another look at your application in another locale.
+
 1. From the Navigator, type [System Localization] and from the sub-menu, select [Field Labels]
   ![](./images/ExportFieldLabels.png)
 
@@ -139,7 +105,9 @@ delivering and deploying global apps.
  * Messages - Though our next section focusses a little more specifically on this area.
 
 ## Section 3: Translate a UI Page
-The process for handling dynamic/messages within code is a little different, so this next section is going to focus specifically on this area.  To do this we're going to create a simple UI page.
+
+### Section Goal:
+Managing dynamic strings or user messages is a little different, so in this section we're going to focus on this area, creating a simple UI page, externalizing the strings to make them available for translation, and showing you how to manage translations for these UI elements.
 
 1. Create a simple new UI page.  Return to your [Waiting Room] app in [Studio] and from the [Create Application File], select [Forms and UI] and [UI Page] and click on [Create].
   ![](./images/CreateUIPage.png)
@@ -193,6 +161,10 @@ Your HTML section should look something like this:
 
 
 ## Section 4: Translate a Portal Widget
+
+### Section Goal:
+Here, we are going to take what we learned from the previous section and apply it to the process of managing the translations for a service Portal widget.  We'll take a look at some of the sample widgets included out of the box in a ServiceNow instance, and show you how to manage translations for user-facing translatable elements.
+
 Following on from the translation of the custom UI page, let's take a look at the changes involved in translating a Service Portal Widget.  
 1. Go to [Service Portal Configuration], [Widget Editor], Select the [Hello World 1] widget.
 1. Preview the widget – Switch your locale to French ([Profile] [Language] [Refresh])
@@ -251,6 +223,10 @@ Following on from the translation of the custom UI page, let's take a look at th
 
 
 ## Section 5: TranslationLoader Script Include
+
+### Section Goal:
+In this section, we're going to move away from our app for a little while, to look at more automated mechanisms for managing the flow of translations, specifically leveraging a pre-existing 'script include', exporting the resulting records, and showing you how to re-import these, via means of some data sources and transform maps we created for the demonstration.
+
 TranslationLoader is a 'script include' (available out of the box), that expedites the process of gathering translatable content from the translation tables and streamlines the process of extracting and re-importing this content.  The Excel spreadsheets generated as an output of this process are not structured in the same manner as a typical table export.  As such, you need to create Import Set Data Sources, transform maps to consume the translated content back into your instance into the required language fields in the language tables.
 
 For the purposes of this workshop, we have created an 'update set' that you can import and apply to your instance, that implements the following changes to your instance:
@@ -269,9 +245,6 @@ For the purposes of this workshop, we have created an 'update set' that you can 
 
 1. Return to [Retrieved Update Sets], [Preview] your update set and asusming there are no conflicts, [Commit Update set].
 ![](./images/UpdateSetPreviewandCommit.png)
-
-
-
 
 
 ### Executing the TranslationLoader Script
@@ -332,12 +305,27 @@ The TranslationLoader script takes approximately 3-4 hours to run on a clean zBo
  * In this example, you can see we have exposed the [Property] column, and added Spanish support to the MSG Translated [Data source].  The next time we import an Excel spreadsheet generated using the TranslationLoader script, and import it using the MSG Translated data source, the Spanish column will be imported, alongside the French and Italian translated records.
  ![](./images/AddSpanishProperty.png)
 
+## Section 6: Lessons learned from internationalization of the DevOps Application
+The DevOps app presented an interesting opportunity for us, as it is a standalone release, with no pre-existing distribution as part of a family release.  As such, we could not leverage the typical automation steps we used to analyze the DevOps content, extract translatable content in an automated fashion, and release it as part of a family release language plugin.  In effect we had to perform these tasks much as our customers do, using the standard features of the platform.
 
+### The good
+The team developing the DevOps application, are thankfully well-versed in the realm of developing properly internationalized products and generally speaking, we encountered few issues during the internationalization testing phase of the project.
+ * User-facing UI elements (for the most part) used translatable field types
+ * User-facing messages were wrapped in exnternalization wrappers (e.g. gs.getMessage)
+ * The code/logic did not make assumptions about string language values (references to English strings)
+ ![](./images/DevOps1.png)
 
-### Lessons learned from internationalization of the DevOps App
-1. At this point, we're coming to the conclusion of our workshop and we'd like to circle back and discuss some lessons learned from our process of performing an internationalization review of the DevOps content.  We hope you manage to stick with us for the duration of the workshop and we would welcome your thoughts and feedback, but also your suggestions.
-![](./images/DevOps1.png)
+### The Bad
+It can be challenging to identify every single occurrence of a user-facing string, which is where the usefulness of internationalization testing comes into play.  After extractions, we perform 'pseudo' or 'fake' translation and testing, much as we did earlier in the workshop.  This effort highlighted some strings that had not been identified as user-facing and were not suitably wrapped in `getMessage` methods.  Here are some of those examples:
+
 ![](./images/DevOps2.png)
 ![](./images/DevOps3.png)
 ![](./images/DevOps4.png)
+
+### The Ugly
+The final example we have for you, is potentially the worst kind - where the code makes determinations or logical assignment based on an assumed static (English) user interface. In these examples they can affect the functionality of an application when those interrogated values are translated.  Again, this highlights the important of an internationalization review and testing phase.  
 ![](./images/DevOps5.png)
+
+## Wrap-up
+Thank you for taking the time to participate in our ServiceNow Apps localization break-out session/workshop.  If you had any problems accessing or following this script or have any follow-up questions we'll be here for a while after the session concludes, so please reach out to us and we'd be happy to help.
+ 
