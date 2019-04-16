@@ -256,7 +256,7 @@ The TranslationLoader script takes approximately 3-4 hours to run on a clean zBo
 
 
 1. Navigate to the [System UI] [Script Includes], find the TranslationLoader script and either update it with our edited script or create a new Script include.
-![](./images/TranslationLoader.png)
+![](./images/translationLoader.png)
 
 1. Run the amended script in Global scope:
 ![](./images/TranslationLoaderExecuteScript.png)
