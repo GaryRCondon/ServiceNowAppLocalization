@@ -274,9 +274,11 @@ The TranslationLoader script takes approximately 3-4 hours to run on a clean zBo
 1. Filter the required fields and export.
  ![](./images/TranslationLoaderExecuteScriptExport.png)
 
-1. Note: the exported spreadsheet format differs from the standard table export, with column corresponding to the source, for each of the  target languages.
+1. Note: the exported spreadsheet format differs from the standard table export, with column corresponding to the source, for each of the target languages.
 
  ![](./images/TranslationLoaderExported.png)
+
+ ** Best Practice: If you haven't imported and applied the update set we created for this workshop and you are exporting/re-importing from the table `Translated Text Translations` you will need to re-configure the table view to include the column `Document Sys ID`.  This column provides the unique key reference required to successfully re-import the translated records.  **
 
 1. Translate the values corresponding to your desired target locales and save the spreadsheet.
 
@@ -328,4 +330,3 @@ The final example we have for you, is potentially the worst kind - where the cod
 
 ## Wrap-up
 Thank you for taking the time to participate in our ServiceNow Apps localization break-out session/workshop.  If you had any problems accessing or following this script or have any follow-up questions we'll be here for a while after the session concludes, so please reach out to us and we'd be happy to help.
- 
